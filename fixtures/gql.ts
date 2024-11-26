@@ -4,7 +4,7 @@ import { getSdk } from '@gql';
 
 export { expect };
 
-const getClient = (apiContext: APIRequestContext) => getSdk(getSdkRequester(apiContext));
+const getClient = (apiContext: APIRequestContext) => getSdk(getSdkRequester(apiContext, '/graphql'));
 
 type WorkerFixtures = {
     gql: ReturnType<typeof getClient>;
@@ -14,9 +14,9 @@ export const test = baseTest.extend<{}, WorkerFixtures>({
     gql: [
         async ({}, use) => {
             const apiContext = await request.newContext({
-                baseURL: 'http://localhost:4000'
+                baseURL: 'http://localhost:3000'
             });
-            await use(getClient(apiContext));
+            await use(getClient(apiContext, ));
         }, { auto: false, scope: 'worker' }
     ]
 });

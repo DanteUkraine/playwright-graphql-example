@@ -1,9 +1,11 @@
 import { test, expect } from "@fixtures/gql";
 
 test('playwright-graphql test', async ({ gql }) => {
-    const res = await gql.getCityByName({
-        name: 'Lviv'
-    });
+    const res = await gql.users({});
 
-    expect(res.getCityByName).not.toBeNull();
+    expect(res.users).toEqual(
+        expect.arrayContaining([
+            expect.objectContaining({ username: 'jeresig' })
+        ])
+    );
 })
