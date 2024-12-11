@@ -9,3 +9,13 @@ test('playwright-graphql test', async ({ gql }) => {
         ])
     );
 })
+
+test('playwright-graphql test with raw response', async ({ rawGql }) => {
+    const res = await rawGql.users({});
+
+    expect(res.data?.users).toEqual(
+        expect.arrayContaining([
+            expect.objectContaining({ username: 'jeresig' })
+        ])
+    );
+})

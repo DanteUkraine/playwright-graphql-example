@@ -17,6 +17,16 @@ const config: CodegenConfig = {
         },
       },
     },
+    'gql/raw-graphql.ts': {
+      plugins: ['typescript', 'typescript-operations', 'typescript-generic-sdk'],
+      config: {
+        rawRequest: true,
+        scalars: {
+          BigInt: 'bigint|number',
+          Date: 'string',
+        },
+      },
+    },
   },
 };
 
