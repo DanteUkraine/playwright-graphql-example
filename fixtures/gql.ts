@@ -1,11 +1,11 @@
 import { test as baseTest, expect, request, APIRequestContext } from '@playwright/test';
-import { getSdkRequester } from '../../../TypeScript/playwright-graphql/lib/requester';
+import { getSdkRequester } from 'playwright-graphql';
 import { getSdk } from '@gql';
 import { getSdk as getSdkRaw } from '@gql.raw';
 
 export { expect };
 
-const getClient = (apiContext: APIRequestContext) => getSdk(getSdkRequester(apiContext, { gqlEndpoint: '/graphql' }));
+const getClient = (apiContext: APIRequestContext) => getSdk(getSdkRequester(apiContext, '/graphql'));
 const getRawClient = (apiContext: APIRequestContext) => getSdkRaw(getSdkRequester(apiContext, { gqlEndpoint: '/graphql', rawResponse: true }));
 
 
