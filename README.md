@@ -13,3 +13,13 @@ When your SUT is ready.
 
 ### Run tests
 `npm test`
+
+```ts
+test('verify location retrieval', async ({ gql }) => {
+    const response = await gql.getLocation({ locationId: 1428 });
+
+    // Assertions on the returned data
+    expect(response.location.name).toBe('Test Location');
+});
+
+```

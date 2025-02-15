@@ -1,7 +1,7 @@
 import { test, expect } from "@fixtures/gql";
 
 test('playwright-graphql test', async ({ gql }) => {
-    const res = await gql.users({});
+    const res = await gql.users();
 
     expect(res.users).toEqual(
         expect.arrayContaining([
@@ -11,7 +11,7 @@ test('playwright-graphql test', async ({ gql }) => {
 })
 
 test('playwright-graphql test with raw response', async ({ rawGql }) => {
-    const res = await rawGql.users({});
+    const res = await rawGql.users();
 
     expect(res.data?.users).toEqual(
         expect.arrayContaining([

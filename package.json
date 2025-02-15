@@ -28,9 +28,9 @@
   },
   "homepage": "https://github.com/DanteUkraine/playwright-graphql-example#readme",
   "dependencies": {
-    "@playwright/test": "^1.48.2",
+    "@playwright/test": "^1.50.1",
     "@types/node": "^22.8.7",
-    "playwright-graphql": "^1.0.4",
+    "playwright-graphql": "^1.1.0",
     "typescript": "^5.6.3"
   }
 }

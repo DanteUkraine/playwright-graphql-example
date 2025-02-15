@@ -137,3 +137,6 @@ gql/**/*.ts
 gql/**/*.js
 test-results
 .ssh
+
+# reporter
+*.html
