@@ -1,5 +1,5 @@
 import { test as baseTest, expect, request, APIRequestContext, APIResponse } from '@playwright/test';
-import { getSdkRequester, coverageLogger } from '../../../TypeScript/playwright-graphql/lib';
+import { getSdkRequester, coverageLogger } from 'playwright-graphql';
 import { getSdk } from '@gql';
 import { getSdk as getSdkRaw } from '@gql.raw';
 
@@ -13,8 +13,8 @@ const requestHandlerCallback = async (request: () => Promise<APIResponse>) => {
     return res;
 };
 
-const getClient = (apiContext: APIRequestContext) => getSdk(getSdkRequester(apiContext, '/graphql', requestHandlerCallback));
-const getRawClient = (apiContext: APIRequestContext) => getSdkRaw(getSdkRequester(apiContext, { gqlEndpoint: '/graphql', rawResponse: true }));
+const getClient = (apiContext: APIRequestContext) => getSdk(getSdkRequester(apiContext, '', requestHandlerCallback));
+const getRawClient = (apiContext: APIRequestContext) => getSdkRaw(getSdkRequester(apiContext, { gqlEndpoint: '', rawResponse: true }));
 
 
 type WorkerFixtures = {
@@ -27,7 +27,10 @@ export const test = baseTest.extend<{}, WorkerFixtures>({
     apiContext: [
         async ({}, use) => {
             const apiContext = await request.newContext({
-                baseURL: 'http://localhost:3000'
+                baseURL: 'https://graphql-pokeapi.graphcdn.app/',
+                extraHTTPHeaders: {
+                  'Content-Type': 'application/json'
+                }
             });
             await use(apiContext);
         }, { scope: 'worker' }

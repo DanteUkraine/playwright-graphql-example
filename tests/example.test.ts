@@ -1,21 +1,22 @@
 import { test, expect } from "@fixtures/gql";
 
 test('playwright-graphql test', async ({ gql }) => {
-    const res = await gql.users();
+    const res = await gql.pokemons({
+        limit: 2,
+        offset: 1,
+    });
 
-    expect(res.users).toEqual(
+    expect(res.pokemons?.results).toEqual(
         expect.arrayContaining([
-            expect.objectContaining({ username: 'jeresig' })
+            expect.objectContaining({ name: 'venusaur' })
         ])
     );
 })
 
 test('playwright-graphql test with raw response', async ({ rawGql }) => {
-    const res = await rawGql.users();
+    const res = await rawGql.pokemon({
+        name: 'venusaur'
+    });
 
-    expect(res.data?.users).toEqual(
-        expect.arrayContaining([
-            expect.objectContaining({ username: 'jeresig' })
-        ])
-    );
+    expect(res.data?.pokemon).toMatchObject({ name: 'venusaur' });
 })

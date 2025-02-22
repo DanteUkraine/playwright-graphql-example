@@ -13,8 +13,9 @@ export default defineConfig({
 
     // Reporter to use
     reporter: [
+        ['list'],
         ['html', { open: 'never' }],
-        ['../../TypeScript/playwright-graphql/lib/reporter', {
+        ['playwright-graphql/coverage-reporter', {
             graphqlFilePath: './gql/graphql.ts',
             minCoveragePerOperation: 20,
             logUncoveredOperations: true,
