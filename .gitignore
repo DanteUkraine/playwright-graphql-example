@@ -137,6 +137,7 @@ gql/**/*.ts
 gql/**/*.js
 test-results
 .ssh
+codegen.ts
 
 # reporter
 *.html

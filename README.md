@@ -7,7 +7,7 @@ As a System under test is https://graphql-pokeapi.vercel.app playground.
 `npm i`
 
 ### Generate graphql schema, operations and types
-`npm run codegen`
+`npm playwright-graphql --url https://graphql-pokeapi.vercel.app --coverage`
 
 ### Run tests
 `npm test`
