@@ -1,10 +1,11 @@
 import { test as baseTest, expect, request, APIRequestContext, APIResponse } from '@playwright/test';
-import { getClient, GqlAPI, RequestHandler } from '@gql';
+import { getClient as getPokemonClient, GqlAPI as PokemonAPI, RequestHandler as PokemonRequestHandler } from '@gql/pokemon';
+import { getClient as getCountryClient, GqlAPI as CountryAPI } from '@gql/country';
 
 export { expect };
 
 // This optional callback allows user to add custom logic to gql api call.
-const requestHandlerCallback: RequestHandler = async (request: () => Promise<APIResponse>) => {
+const requestHandlerCallback: PokemonRequestHandler = async (request: () => Promise<APIResponse>) => {
   //  console.log('Before api call');
     const res = await request();
  //   console.log(`After api call: ${res.status()}`);
@@ -13,7 +14,8 @@ const requestHandlerCallback: RequestHandler = async (request: () => Promise<API
 
 type WorkerFixtures = {
     apiContext: APIRequestContext;
-    gql: GqlAPI;
+    pokemonAPI: PokemonAPI;
+    countryAPI: CountryAPI;
 };
 
 export const test = baseTest.extend<{}, WorkerFixtures>({
@@ -28,9 +30,14 @@ export const test = baseTest.extend<{}, WorkerFixtures>({
             await use(apiContext);
         }, { scope: 'worker' }
     ],
-    gql: [
+    pokemonAPI: [
         async ({ apiContext }, use) => {
-            await use(getClient(apiContext, { gqlEndpoint: '' }, requestHandlerCallback));
+            await use(getPokemonClient(apiContext, { gqlEndpoint: '' }, requestHandlerCallback));
+        }, { auto: false, scope: 'worker' }
+    ],
+    countryAPI: [
+        async ({ apiContext }, use) => {
+            await use(getCountryClient(apiContext, { gqlEndpoint: '' }));
         }, { auto: false, scope: 'worker' }
     ],
 });

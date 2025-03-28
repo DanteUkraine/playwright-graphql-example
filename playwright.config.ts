@@ -6,11 +6,17 @@ export default defineConfig({
         ['list'],
         ['html', { open: 'never' }],
         ['playwright-graphql/coverage-reporter', {
-            graphqlFilePath: './gql/graphql.ts',
+            graphqlFilePath: './gql/pokemon.ts',
             minCoveragePerOperation: 20,
             logUncoveredOperations: true,
             saveGqlCoverageLog: false,
-            coverageFilePath: './gql-coverage.log',
+            saveHtmlSummary: true
+        }],
+        ['playwright-graphql/coverage-reporter', {
+            graphqlFilePath: './gql/country.ts',
+            minCoveragePerOperation: 20,
+            logUncoveredOperations: true,
+            saveGqlCoverageLog: false,
             saveHtmlSummary: true
         }]
     ],
